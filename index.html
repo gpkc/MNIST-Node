@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MNIST Trainer</title>
+
+    <script src="./dist/train.js"></script>
+    <script>
+        next = function() {
+            const context = document.getElementById("mnistCanvas").getContext("2d");
+            const digit = random_digit();
+
+            const inverted = digit.input.map(val => Number(!val));
+
+            mnist.draw(inverted, context);
+
+            const result = net_result(digit.input);
+            const resultElement = document.getElementById("result");
+
+            resultElement.innerHTML = result;
+        };
+
+        train_NN = function() {
+            document.getElementById("train_button").disabled = true;
+            const sample_size = document.getElementById("sample_size").value;
+
+            train_rand(Number(sample_size));
+
+            document.getElementById("train_button").disabled = false;
+            document.getElementById("next_button").disabled = false;
+        }
+    </script>
+</head>
+<body>
+<h1>JS MNIST Trainer</h1>
+
+<canvas id="mnistCanvas" width="28" height="28">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<br>
+
+Result: <span id="result">Nothing yet...</span>
+
+<button id="next_button" onclick="next()" disabled>Next</button>
+
+<br>
+
+Training sample size: <input type="number" value=30 id="sample_size" title="Sample size" />
+
+<button id="train_button" onclick="train_NN()">Train</button>
+</body>
+</html>

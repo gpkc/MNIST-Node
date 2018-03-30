@@ -1,0 +1,14 @@
+{
+  "name": "mnist_brain",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "browserify ./src/train.js > ./dist/train.js"
+  },
+  "devDependencies": {
+    "browserify": "*"
+  },
+  "dependencies": {
+    "brain.js": "^1.1.2",
+    "mnist": "^1.1.0"
+  }
+}
